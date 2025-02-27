@@ -35,6 +35,29 @@ class ProductScreen extends StatelessWidget {
           }
         },
       ),
+      // body: Obx(() {
+      //     return FutureBuilder<List<Product>>(
+      //           future: apiService.fetchProducts(),
+      //           builder: (context, productController) {
+      //             if (productController.connectionState == ConnectionState.waiting) {
+      //               return Center(child: Lottie.asset(
+      //                 'assets/images/Animation - 1740348375718.json',
+      //                 width: 200,
+      //                 height: 200,
+      //                 fit: BoxFit.cover,
+      //                 repeat: true,
+      //               ),);
+      //             } else if (productController.hasError) {
+      //               return Center(child: Text('Error: ${productController.error}'));
+      //             } else if (!productController.hasData || productController.data!.isEmpty) {
+      //               return Center(child: Text('No products found'));
+      //             } else {
+      //               return buildBody(context, productController.data!);
+      //             }
+      //           },
+      //         );
+      //   }
+      //),
     );
   }
 

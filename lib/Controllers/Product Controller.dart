@@ -6,7 +6,6 @@ class ProductController extends GetxController {
   final ApiService apiService = ApiService();
   var products = <Product>[].obs;
 
-  // جلب المنتجات من الخادم
   Future<void> fetchProducts() async {
     try {
       List<Product> fetchedProducts = await apiService.fetchProducts();
