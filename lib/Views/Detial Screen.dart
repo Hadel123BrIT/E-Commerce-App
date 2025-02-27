@@ -16,7 +16,7 @@ class DetialsScreen extends StatelessWidget {
     final Product product = Get.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text(" Details"),
+        title: Text("Details"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -31,7 +31,7 @@ class DetialsScreen extends StatelessWidget {
                     BoxShadow(
                         blurRadius: 6,
                         spreadRadius: 6,
-                        offset: Offset(0,3),
+                        offset: Offset(0, 3),
                         color: black.withOpacity(0.03)
                     )
                   ]
@@ -40,12 +40,13 @@ class DetialsScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
                 child: Container(
                   child: Hero(
-                      tag: product?.id??'',
-                      child: Image.network( product!.image??'')),
+                      tag: product?.id ?? '',
+                      child: Image.network(product!.image ?? '')
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             Text(
               product.title ?? '',
               style: TextStyle(
@@ -53,7 +54,7 @@ class DetialsScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Text(
               "Category : ${product.category ?? ''}",
               style: TextStyle(
@@ -61,7 +62,7 @@ class DetialsScreen extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Text(
               "Brand : ${product.brand ?? ''}",
               style: TextStyle(
@@ -69,7 +70,7 @@ class DetialsScreen extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Text(
               "Model : ${product.model ?? ''}",
               style: TextStyle(
@@ -77,7 +78,7 @@ class DetialsScreen extends StatelessWidget {
                 color: Colors.brown,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Text(
               "Color : ${product.color ?? ''}",
               style: TextStyle(
@@ -85,8 +86,8 @@ class DetialsScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 10),
-             Text(
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            Text(
               "Price: \$${product.price ?? 0}",
               style: TextStyle(
                 fontSize: 18,
@@ -94,24 +95,24 @@ class DetialsScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
-             Text(
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            Text(
               "Discount: ${product.discount ?? 0}%",
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.red,
               ),
             ),
-            SizedBox(height: 10),
-            if (product.popular ?? false)Row(
-              children: [
-                Icon(Icons.star, color: Colors.amber,size: 18,),
-                SizedBox(width: 5),
-                Text('Popular', style: TextStyle(color: Colors.amber,fontSize: 18)),
-              ],
-            ),
-            SizedBox(height: 20),
-
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            if (product.popular ?? false)
+              Row(
+                children: [
+                  Icon(Icons.star, color: Colors.amber, size: 18),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+                  Text('Popular', style: TextStyle(color: Colors.amber, fontSize: 18)),
+                ],
+              ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             Text(
               "Description:",
               style: TextStyle(
@@ -119,28 +120,29 @@ class DetialsScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
-            Text( " ${product.description ?? ''}",
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            Text(
+              " ${product.description ?? ''}",
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,horizontal: 50,
+                  padding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.height * 0.02,
+                    horizontal: MediaQuery.of(context).size.width * 0.1,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 50, 54, 56),
+                    color: Color.fromARGB(255, 50, 54, 56),
                     borderRadius: BorderRadius.circular(18),
                   ),
-                  child:  const Text("Add to Card",
+                  child: Text(
+                    "Add to Card",
                     style: TextStyle(
                       fontSize: 17.5,
                       color: Colors.white,
@@ -148,19 +150,18 @@ class DetialsScreen extends StatelessWidget {
                       letterSpacing: 1,
                     ),
                   ),
-
                 ),
-                 Obx(()=>
-               IconButton(icon :
-               favoriteController.favorites.contains(product)?Icon(Icons.favorite):
-               Icon(Icons.favorite_border,
-                 color: black,
-               ) ,
-               onPressed: () {
-             favoriteController.addProductToFavorutes(product);
-               },),
-    ),
-    ],
+                Obx(
+                      () => IconButton(
+                    icon: favoriteController.favorites.contains(product)
+                        ? Icon(Icons.favorite)
+                        : Icon(Icons.favorite_border, color: black),
+                    onPressed: () {
+                      favoriteController.addProductToFavorutes(product);
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),

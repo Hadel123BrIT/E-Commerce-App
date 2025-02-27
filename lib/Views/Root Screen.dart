@@ -14,6 +14,7 @@ class RootScreen extends GetView<RootController> {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => RootController());
+    final mediaQuery = MediaQuery.of(context);
     return Obx(
           () => Scaffold(
         resizeToAvoidBottomInset: false,
@@ -22,8 +23,8 @@ class RootScreen extends GetView<RootController> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.grey[300],
           child: Container(
-            width: 25,
-            height: 25,
+            width: mediaQuery.size.width * 0.06,
+            height: mediaQuery.size.width * 0.06,
             child: Icon(Icons.add_box_outlined, color: Colors.black),
           ),
           onPressed: () {

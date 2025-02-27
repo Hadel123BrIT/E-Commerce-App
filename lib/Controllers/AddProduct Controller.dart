@@ -38,17 +38,17 @@ class AddProductController extends GetxController {
         productController.addProductToList(newProduct);
         Get.back();
         Get.snackbar('Success', 'Product added successfully!',
-        snackPosition: SnackPosition.BOTTOM,
+
         );
       } else {
         Get.snackbar('Error', 'Failed to add product.',
-          snackPosition: SnackPosition.BOTTOM,
+
         );
       }
     }
     catch (e) {
       Get.snackbar('Error', 'An error occurred: $e',
-        snackPosition: SnackPosition.BOTTOM,
+
       );
       print(e);
     }

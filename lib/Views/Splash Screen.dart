@@ -20,12 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 5), () {
       Get.toNamed(AppRoutes.root);
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: white,
       body: Center(
@@ -42,24 +42,22 @@ class _SplashScreenState extends State<SplashScreen> {
               TextSpan(
                 text: "Welcome to  ",
                 style: TextStyle(
-                 // color: color_title,
-                  fontSize: 25,
+                  fontSize: mediaQuery.size.width * 0.06,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               TextSpan(
                 text: "shopping online",
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: mediaQuery.size.width * 0.06,
                   fontWeight: FontWeight.bold,
-                 // color: springYellow,
                 ),
               ),
             ])),
             Lottie.asset(
               'assets/images/Animation - 1740348375718.json',
-              width: 300,
-              height: 300,
+              width: mediaQuery.size.width * 0.8,
+              height: mediaQuery.size.height * 0.3,
               fit: BoxFit.cover,
               repeat: true,
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../Controllers/AddProduct Controller.dart';
-
+import '../component/ProductUtils.dart';
 class AddProductScreen extends StatelessWidget {
   final AddProductController controller = Get.put(AddProductController());
 
@@ -17,60 +17,56 @@ class AddProductScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextField(
-                controller: controller.titleController,
-                decoration: InputDecoration(hintText: 'Title'),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              Text(
+                'Add New Product',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextField(
-                controller: controller.imageController,
-                decoration: InputDecoration(hintText: 'Image URL'),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextField(
-                controller: controller.priceController,
-                decoration: InputDecoration(hintText: 'Price'),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextField(
-                controller: controller.descriptionController,
-                decoration: InputDecoration(hintText: 'Description'),
-                maxLines: 3,
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextField(
-                controller: controller.brandController,
-                decoration: InputDecoration(hintText: 'Brand'),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextField(
-                controller: controller.modelController,
-                decoration: InputDecoration(hintText: 'Model'),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextField(
-                controller: controller.colorController,
-                decoration: InputDecoration(hintText: 'Color'),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextField(
-                controller: controller.categoryController,
-                decoration: InputDecoration(hintText: 'Category'),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextField(
-                controller: controller.discountController,
-                decoration: InputDecoration(hintText: 'Discount'),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Title', controller.titleController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Image URL', controller.imageController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Price', controller.priceController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Description', controller.descriptionController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Brand', controller.brandController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Model', controller.modelController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Color', controller.colorController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Category', controller.categoryController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              ProductUtils.buildInputField(context, 'Discount', controller.discountController),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
               ElevatedButton(
                 onPressed: () async {
                   await controller.addProduct();
                 },
-                child: Text('Add Product'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[300],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 14),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 8),
+                    Text(
+                      'Add Product',
+                      style: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

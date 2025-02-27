@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/Binding/AddProduct%20binding.dart';
+import 'package:ecommerce_app/Binding/UpdateProduct%20%20binding.dart';
 import 'package:ecommerce_app/Binding/favourite%20binding.dart';
 import 'package:ecommerce_app/Routes/AppRoutes.dart';
 import 'package:ecommerce_app/Views/Favourite%20Screen.dart';
@@ -11,6 +12,7 @@ import '../Views/Products Screen.dart';
 import '../Views/Root Screen.dart';
 import '../Views/Splash Screen.dart';
 import '../Views/Detial Screen.dart';
+import '../Views/UpdateProduct Screen.dart';
 
 class AppPages{
   static final pages=[
@@ -42,6 +44,10 @@ class AppPages{
       name: AppRoutes.AddProduct,
       page: ()=>  AddProductScreen(),
       binding: AddProductBinding(),
+    ),
+    GetPage(name: AppRoutes.updateProduct,
+        page: () => UpdateProductScreen(product: Get.arguments),
+        binding: UpdateProductBinding(),
     ),
   ];
 }

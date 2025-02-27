@@ -2,10 +2,10 @@ import 'package:ecommerce_app/Routes/AppRoutes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../Const/color.dart';
 import '../Controllers/Favourite Controller.dart';
 import '../Models/Product Models.dart';
+import '../Views/UpdateProduct Screen.dart';
 
 
 class ProductItem extends StatelessWidget {
@@ -15,8 +15,11 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FavouriteController favoriteController = Get.put(FavouriteController()); // تهيئة الـ Controller
+    final FavouriteController favoriteController = Get.put(FavouriteController());
     return GestureDetector(
+      onLongPress: (){
+          Get.toNamed(AppRoutes.updateProduct, arguments: product);
+      },
       onTap: () {
         Get.toNamed(AppRoutes.detial,
             arguments: product);
@@ -28,7 +31,6 @@ class ProductItem extends StatelessWidget {
           margin: EdgeInsets.only(bottom: 10),
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
-              // color: Colors.grey.withOpacity(0.1),
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [

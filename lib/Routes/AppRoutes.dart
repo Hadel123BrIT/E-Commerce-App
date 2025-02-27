@@ -5,4 +5,5 @@ abstract class AppRoutes {
   static const root = "/Root";
   static const detial = "/Detial";
   static const AddProduct = "/AddProduct";
+  static const String updateProduct = '/updateProduct';
 }

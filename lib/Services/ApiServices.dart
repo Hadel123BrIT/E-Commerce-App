@@ -53,4 +53,34 @@ class ApiService {
       throw Exception('Failed to add product: $e');
     }
   }
+  //update product
+  Future<bool> UpdateProduct(Product product) async {
+    try {
+      FormData formData = FormData.fromMap({
+        'title': product.title,
+        'image': product.image,
+        'price': product.price,
+        'description': product.description,
+        'brand': product.brand,
+        'model': product.model,
+        'color': product.color,
+        'category': product.category,
+        'discount': product.discount,
+      });
+      final response = await dio.put(
+        '$baseUrl/products/${product.id}',
+        data: formData,
+      );
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        print("**********************************************");
+        print(" product updated successful");
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print("wrong");
+      throw Exception('Failed to update product: $e');
+    }
+  }
 }

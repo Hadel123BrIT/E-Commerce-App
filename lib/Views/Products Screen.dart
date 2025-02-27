@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,66 +7,51 @@ import '../Controllers/Product Controller.dart';
 import '../Models/Product Models.dart';
 import '../Services/ApiServices.dart';
 import '../component/Product item.dart';
+
 class ProductScreen extends StatelessWidget {
   final ApiService apiService = ApiService();
   final ProductController productController = Get.put(ProductController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
       body: FutureBuilder<List<Product>>(
         future: apiService.fetchProducts(),
-        builder: (context, productController) {
-          if (productController.connectionState == ConnectionState.waiting) {
-            return Center(child: Lottie.asset(
-              'assets/images/Animation - 1740348375718.json',
-              width: 200,
-              height: 200,
-              fit: BoxFit.cover,
-              repeat: true,
-            ),);
-          } else if (productController.hasError) {
-            return Center(child: Text('Error: ${productController.error}'));
-          } else if (!productController.hasData || productController.data!.isEmpty) {
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: Lottie.asset(
+                'assets/images/Animation - 1740348375718.json',
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: MediaQuery.of(context).size.height * 0.25,
+                fit: BoxFit.cover,
+                repeat: true,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text('No products found'));
           } else {
-            return buildBody(context, productController.data!);
+            productController.products.assignAll(snapshot.data!);
+            return Obx(() {
+              return buildBody(context, productController.products);
+            });
           }
         },
       ),
-      // body: Obx(() {
-      //     return FutureBuilder<List<Product>>(
-      //           future: apiService.fetchProducts(),
-      //           builder: (context, productController) {
-      //             if (productController.connectionState == ConnectionState.waiting) {
-      //               return Center(child: Lottie.asset(
-      //                 'assets/images/Animation - 1740348375718.json',
-      //                 width: 200,
-      //                 height: 200,
-      //                 fit: BoxFit.cover,
-      //                 repeat: true,
-      //               ),);
-      //             } else if (productController.hasError) {
-      //               return Center(child: Text('Error: ${productController.error}'));
-      //             } else if (!productController.hasData || productController.data!.isEmpty) {
-      //               return Center(child: Text('No products found'));
-      //             } else {
-      //               return buildBody(context, productController.data!);
-      //             }
-      //           },
-      //         );
-      //   }
-      //),
     );
   }
 
   Widget buildBody(BuildContext context, List<Product> products) {
+    final mediaQuery = MediaQuery.of(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           getHeader(),
-          SizedBox(height: 15),
+          SizedBox(height: mediaQuery.size.height * 0.02),
           getSearch(context),
           ListView.builder(
             shrinkWrap: true,
@@ -147,10 +131,14 @@ class ProductScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.05,
             width: MediaQuery.of(context).size.width * 0.1,
             decoration: BoxDecoration(color: Colors.grey[300]),
-            child: Center(child: SvgPicture.asset("assets/icons/filter.svg",color: Colors.grey,
-              width: MediaQuery.of(context).size.width * 0.03,
-              height: MediaQuery.of(context).size.height * 0.03,
-            )),
+            child: Center(
+              child: SvgPicture.asset(
+                "assets/icons/filter.svg",
+                color: Colors.grey,
+                width: MediaQuery.of(context).size.width * 0.03,
+                height: MediaQuery.of(context).size.height * 0.03,
+              ),
+            ),
           ),
         ],
       ),

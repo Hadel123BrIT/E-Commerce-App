@@ -11,12 +11,24 @@ class ProductController extends GetxController {
       List<Product> fetchedProducts = await apiService.fetchProducts();
       products.assignAll(fetchedProducts);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load products: $e');
+      Get.snackbar('Error', 'Failed to load products: $e',
+      snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
-
+  //to add the orgin list in product screen
   void addProductToList(Product product) {
     products.add(product);
+
+  }
+
+ // to update product in product screen
+  void updateProductInList(Product updatedProduct) {
+    //query
+    final index = products.indexWhere((p) => p.id == updatedProduct.id);
+    if (index != -1) {
+      products[index] = updatedProduct;
+    }
   }
 }
