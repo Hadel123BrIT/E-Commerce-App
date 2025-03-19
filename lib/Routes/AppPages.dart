@@ -1,18 +1,14 @@
-import 'package:ecommerce_app/Binding/AddProduct%20binding.dart';
-import 'package:ecommerce_app/Binding/UpdateProduct%20%20binding.dart';
-import 'package:ecommerce_app/Binding/favourite%20binding.dart';
-import 'package:ecommerce_app/Routes/AppRoutes.dart';
-import 'package:ecommerce_app/Views/Favourite%20Screen.dart';
 import 'package:get/get.dart';
-import '../Binding/Product binding.dart';
-import '../Binding/Root binding.dart';
-import '../Binding/Detial binding.dart';
-import '../Views/AddProduct Screen.dart';
-import '../Views/Products Screen.dart';
-import '../Views/Root Screen.dart';
-import '../Views/Splash Screen.dart';
-import '../Views/Detial Screen.dart';
-import '../Views/UpdateProduct Screen.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import '../Views/poduct_view/product_screen/AddProduct Screen.dart';
+import '../Views/Detial_view/Detial_screen/Detial Screen.dart';
+import '../Views/favourite_view/favourite_screen/Favourite Screen.dart';
+import '../Views/poduct_view/product_screen/Products Screen.dart';
+import '../Views/root_view/root_screen/Root Screen.dart';
+import '../Views/splash_view/splash_screen/Splash Screen.dart';
+import '../Views/poduct_view/product_screen/UpdateProduct Screen.dart';
+import 'AppRoutes.dart';
 
 class AppPages{
   static final pages=[
@@ -23,31 +19,27 @@ class AppPages{
     GetPage(
       name: AppRoutes.products,
       page: ()=> ProductScreen(),
-      binding: ProductBinding(),
     ),
     GetPage(
       name: AppRoutes.favourite,
       page: ()=> FavouriteScreen(),
-      binding: FavouriteBinding(),
     ),
     GetPage(
       name: AppRoutes.root,
       page: ()=> RootScreen(),
-      binding: RootBinding(),
     ),
     GetPage(
       name: AppRoutes.detial,
       page: ()=>  DetialsScreen(),
-      binding: DetialBinding(),
     ),
     GetPage(
       name: AppRoutes.AddProduct,
       page: ()=>  AddProductScreen(),
-      binding: AddProductBinding(),
+
     ),
     GetPage(name: AppRoutes.updateProduct,
         page: () => UpdateProductScreen(product: Get.arguments),
-        binding: UpdateProductBinding(),
+
     ),
   ];
 }
